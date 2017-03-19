@@ -17,12 +17,14 @@ import kafka.producer.ProducerConfig;
  */
 public class KafkaProducer {
     private final Producer<String, String> producer;
-    public final static String TOPIC = "test";
+    public final static String TOPIC = "YPT_KAFKA_TASK_DATA_TOPIC";
 
     private KafkaProducer() {
         Properties props = new Properties();
         //此处配置的是kafka的端口
-        props.put("metadata.broker.list", "172.17.102.171:9092");
+//        props.put("metadata.broker.list", "172.17.102.171:9092");
+        props.put("metadata.broker.list", "172.17.103.186:9092,172.17.103.187:9092,172.17.103.188:9092");
+
 
         //配置value的序列化类
         props.put("serializer.class", "kafka.serializer.StringEncoder");
@@ -40,7 +42,7 @@ public class KafkaProducer {
 
     void produce() {
         int messageNo = 1000;
-        final int COUNT = 10000;
+        final int COUNT = 1000000;
 
         while (messageNo < COUNT) {
             String key = String.valueOf(messageNo);
